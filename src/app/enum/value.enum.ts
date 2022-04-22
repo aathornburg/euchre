@@ -1,5 +1,5 @@
 export enum Value {
-    Nine = 1,
+    Nine,
     Ten,
     Jack,
     Queen,

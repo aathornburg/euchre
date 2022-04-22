@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DealService } from '../service/deal.service';
+import { GameManagerService } from '../service/game-manager.service';
 
 @Component({
   selector: 'app-folder',
@@ -10,9 +10,13 @@ export class FolderPage implements OnInit {
   public folder: string;
 
   constructor(
-    private dealService: DealService
+    private gameManagerService: GameManagerService
   ) { }
 
-  ngOnInit():void  {}
+  ngOnInit(): void {}
+
+  begin(): void {
+    this.gameManagerService.begin();
+  }
 
 }

@@ -17,7 +17,7 @@ export abstract class Store {
 
     select<T>(name: string): Observable<T> {
         return this.store.pipe(
-            map((state: State) => state[name]),
+            map<State, T>((state: State) => state[name]),
             distinctUntilChanged<T>()
         );
     }
