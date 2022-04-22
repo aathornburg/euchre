@@ -39,6 +39,14 @@ export class CardService {
       first(),
       tap(([ deck, players ]: [ Card[], Player[] ]) => {
         console.log("Dealing " + JSON.stringify(deck[0]) + ", " + JSON.stringify(deck[1]) + " to player " + JSON.stringify(players[0]));
+        let dealing3Cards = true;
+        for (let dealRound = 0; dealRound < 2; dealRound++) {
+          players.forEach((player: Player, index: number) => {
+            let cardsToDeal: Card[] = deck.splice(0, dealing3Cards ? 3 : 2);
+            // Need to figure out decent way to loop over each player twice, as in 0, 1, 2, 3, 0, 1, 2, 3
+            // but gives cards in order of 3, 2, 3, 2, 2, 3, 2, 3
+          })
+        }
       })
     ).subscribe();
   }
