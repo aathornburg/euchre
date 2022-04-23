@@ -31,13 +31,24 @@ export class TeamService {
       first(),
       map((players: Player[]) => players[playerIndex]),
       tap((player: Player) => player.addToHand(cards))
-    ).subscribe(// Need to set the player to the team and re-set the team in the store);
-    );
+    ).subscribe((player: Player) => {
+      this.setPlayer(playerIndex, player)
+    });
   }
 
   public getPlayer(playerIndex: number): Observable<Player> {
     return this.players$.pipe(
       map((players: Player[]) => players[playerIndex])
     );
+  }
+
+  private setPlayer(playerIndex: number, player: Player): void {
+    this.teamStore.select('teams').pipe(
+      first(),
+      map((teams: Team[]) => {
+        // teams[playerIndex % 2].getPlayer(Math.floor(playerIndex / 2)) = player;
+        return teams;
+      })
+    ).subscribe((teams: Team[]) => this.teamStore.set('teams', teams))
   }
 }
