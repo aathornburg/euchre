@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { first, map, tap } from 'rxjs/operators';
+import { Card } from '../model/card.model';
 import { Player } from '../model/player.model';
 import { Team } from '../model/team.model';
 import { TeamStore } from '../store/team.store';
@@ -24,4 +25,12 @@ export class TeamService {
   constructor(
     private teamStore: TeamStore
   ) { }
+
+  public dealToPlayer(playerIndex: number, cards: Card[]): void {
+    this.players$.pipe(
+      first(),
+      map((players: Player[]) => players[playerIndex]),
+      tap((player: Player) => player.addToHand(cards))
+    ).subscribe();
+  }
 }

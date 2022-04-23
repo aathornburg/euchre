@@ -42,7 +42,7 @@ export class CardService {
           players.forEach((player: Player, index: number) => {
             let dealing3Cards = dealRound % 2 === index % 2;
             let cardsToDeal: Card[] = deck.splice(0, dealing3Cards ? 3 : 2);
-            // Give cards to player[index]
+            this.teamService.dealToPlayer(index, cardsToDeal);
           })
         }
       })
