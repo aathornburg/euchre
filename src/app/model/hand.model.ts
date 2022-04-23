@@ -3,13 +3,13 @@ import { Card } from "./card.model";
 
 export class Hand {
 
-    cards: Card[]
+    public cards: Card[] = [];
 
     addCards(cards: Card[]): void {
         this.cards.concat(cards);
     }
 
     sort(sortOrder: SortOrder = SortOrder.HighToLow): void {
-        
+
     }
 }

@@ -7,15 +7,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" color="primary">
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
-
-  <div class="main-container">
-    <div class="hand-container"></div>
-    <ion-button expand="full" color="secondary" (click)="begin()">Start</ion-button>
-  </div>
-</ion-content>
+<ng-container *ngIf="player$ | async as player">
+  <ion-content [fullscreen]="true" color="primary">
+    <!-- <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">{{ folder }}</ion-title>
+      </ion-toolbar>
+    </ion-header> -->
+  
+    <div class="main-container">
+      <div class="hand-container">
+        <div>{{ player }}</div>
+        <div *ngFor="let card of player.hand.cards">
+          <div>{{ card.suit }}</div>
+          <div>{{ card.value }}</div>
+        </div>
+      </div>
+      <ion-button expand="full" color="secondary" (click)="begin()">Start</ion-button>
+    </div>
+  </ion-content>
+</ng-container>

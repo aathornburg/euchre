@@ -31,6 +31,13 @@ export class TeamService {
       first(),
       map((players: Player[]) => players[playerIndex]),
       tap((player: Player) => player.addToHand(cards))
-    ).subscribe();
+    ).subscribe(// Need to set the player to the team and re-set the team in the store);
+    );
+  }
+
+  public getPlayer(playerIndex: number): Observable<Player> {
+    return this.players$.pipe(
+      map((players: Player[]) => players[playerIndex])
+    );
   }
 }
