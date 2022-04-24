@@ -6,7 +6,7 @@ export class Hand {
     public cards: Card[] = [];
 
     addCards(cards: Card[]): void {
-        this.cards.concat(cards);
+        this.cards = this.cards.concat(cards);
     }
 
     sort(sortOrder: SortOrder = SortOrder.HighToLow): void {

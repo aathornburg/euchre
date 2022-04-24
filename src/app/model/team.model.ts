@@ -13,4 +13,8 @@ export class Team {
         return this.players[index];
     }
 
+    public setPlayer(index: number, player: Player): void {
+        this.players[index] = player;
+    }
+
 }

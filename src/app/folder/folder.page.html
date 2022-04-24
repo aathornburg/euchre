@@ -14,13 +14,30 @@
         <ion-title size="large">{{ folder }}</ion-title>
       </ion-toolbar>
     </ion-header> -->
-  
+    <!-- <ng-container *ngIf="player1$ | async as player1">
+      <div>Player 1:</div>
+      <div *ngFor="let card of player1.hand.cards">
+        <span>Suit: {{ card.suit }} - Value: {{ card.value }}</span>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="player2$ | async as player2">
+      <div>Player 2:</div>
+      <div *ngFor="let card of player2.hand.cards">
+        <span>Suit: {{ card.suit }} - Value: {{ card.value }}</span>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="player3$ | async as player3">
+      <div>Player 3:</div>
+      <div *ngFor="let card of player3.hand.cards">
+        <span>Suit: {{ card.suit }} - Value: {{ card.value }}</span>
+      </div>
+    </ng-container> -->
     <div class="main-container">
       <div class="hand-container">
-        <div *ngFor="let card of player.hand.cards">
-          <div>{{ card.suit }}</div>
-          <div>{{ card.value }}</div>
-        </div>
+        <hand [player]="player"></hand>
+        <!-- <span *ngFor="let card of player.hand.cards">
+          <span>Suit: {{ card.suit }} - Value: {{ card.value }}</span>
+        </span> -->
       </div>
       <ion-button expand="full" color="secondary" (click)="begin()">Start</ion-button>
     </div>

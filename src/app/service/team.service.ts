@@ -29,11 +29,8 @@ export class TeamService {
   public dealToPlayer(playerIndex: number, cards: Card[]): void {
     this.players$.pipe(
       first(),
-      map((players: Player[]) => players[playerIndex]),
-      tap((player: Player) => player.addToHand(cards))
-    ).subscribe((player: Player) => {
-      this.setPlayer(playerIndex, player)
-    });
+      tap((players: Player[]) => players[playerIndex].addToHand(cards))
+    ).subscribe();
   }
 
   public getPlayer(playerIndex: number): Observable<Player> {
@@ -43,11 +40,13 @@ export class TeamService {
   }
 
   private setPlayer(playerIndex: number, player: Player): void {
+    const teamIndex = playerIndex % 2;
+    const playerInTeamIndex = Math.floor(playerIndex / 2);
+
     this.teamStore.select('teams').pipe(
       first(),
-      map((teams: Team[]) => {
-        // teams[playerIndex % 2].getPlayer(Math.floor(playerIndex / 2)) = player;
-        return teams;
+      tap((teams: Team[]) => {
+        teams[playerIndex % 2].setPlayer(Math.floor(playerIndex / 2), player);
       })
     ).subscribe((teams: Team[]) => this.teamStore.set('teams', teams))
   }
