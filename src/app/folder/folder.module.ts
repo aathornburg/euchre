@@ -8,6 +8,7 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 
 import { FolderPage } from './folder.page';
 import { HandComponent } from '../component/hand/hand.component';
+import { CardComponent } from '../component/card/card.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { HandComponent } from '../component/hand/hand.component';
   ],
   declarations: [
     FolderPage,
-    HandComponent
+    HandComponent,
+    CardComponent
   ]
 })
 export class FolderPageModule {}

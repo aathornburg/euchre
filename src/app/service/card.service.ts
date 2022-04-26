@@ -43,7 +43,6 @@ export class CardService {
             let dealing3Cards = dealRound % 2 === index % 2;
             let cardsToDeal: Card[] = deck.splice(0, dealing3Cards ? 3 : 2);
             this.teamService.dealToPlayer(index, cardsToDeal);
-            setTimeout(() => { console.log('test'); }, 2000);
           })
         }
       })
