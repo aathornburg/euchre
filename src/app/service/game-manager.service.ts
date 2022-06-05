@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CardService } from './card.service';
+import { DeckService } from './deck.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +7,11 @@ import { CardService } from './card.service';
 export class GameManagerService {
 
   constructor(
-    private cardService: CardService
+    private deckService: DeckService
   ) { }
 
   public begin(): void {
-    this.cardService.shuffleDeck();
-    this.cardService.dealToAllPlayers();
+    this.deckService.shuffleDeck();
+    this.deckService.dealToAllPlayers();
   }
 }

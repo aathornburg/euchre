@@ -1,55 +1,40 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
-import { first, map, tap } from 'rxjs/operators';
+import { Suit } from '../enum/suit.enum';
+import { Value } from '../enum/value.enum';
 import { Card } from '../model/card.model';
-import { Hand } from '../model/hand.model';
-import { Player } from '../model/player.model';
-import { CardStore } from '../store/card.store';
-import { TeamService } from './team.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
 
-  private deck$: Observable<Card[]> = this.cardStore.select('deck');
-
-  constructor(
-    private cardStore: CardStore,
-    private teamService: TeamService
-  ) { }
-
-  public shuffleDeck(): void {
-    this.deck$.pipe(
-      first(),
-      map((deck: Card[]) =>
-        deck
-          .map((card: Card) => ({ card, sort: Math.random() }))
-          .sort((a, b) => a.sort - b.sort)
-          .map(({ card }) => card)
-      )
-    ).subscribe((shuffledDeck: Card[]) => this.cardStore.set('deck', shuffledDeck))
+  public getCardValueAsString(card: Card): string {
+    switch(Number(card.value)) {
+      case Value.Nine:
+        return '9';
+      case Value.Ten:
+        return '10';
+      case Value.Queen:
+        return 'Q';
+      case Value.Jack:
+        return 'J';
+      case Value.King:
+        return 'K';
+      case Value.Ace:
+        return 'A';
+    }
   }
 
-  public dealToAllPlayers(): void {
-    combineLatest([
-      this.deck$,
-      this.teamService.players$
-    ]).pipe(
-      first(),
-      tap(([ deck, players ]: [ Card[], Player[] ]) => {
-        for (let dealRound = 0; dealRound < 2; dealRound++) {
-          players.forEach((player: Player, index: number) => {
-            let dealing3Cards = dealRound % 2 === index % 2;
-            let cardsToDeal: Card[] = deck.splice(0, dealing3Cards ? 3 : 2);
-            this.teamService.dealToPlayer(index, cardsToDeal);
-          })
-        }
-      })
-    ).subscribe();
-  }
-
-  getHand(): Hand {
-    return null;
+  public getCardSuitAsString(card: Card): string {
+    switch(Number(card.suit)) {
+      case Suit.Club:
+        return '♣';
+      case Suit.Diamond:
+        return '♦';
+      case Suit.Heart:
+        return '♥';
+      case Suit.Spade:
+        return '♠';
+    }
   }
 }

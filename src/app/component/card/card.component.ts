@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Card } from 'src/app/model/card.model';
+import { CardService } from 'src/app/service/card.service';
 
 @Component({
   selector: 'card',
@@ -9,10 +10,20 @@ import { Card } from 'src/app/model/card.model';
 export class CardComponent implements OnInit {
 
   @Input()
-  private card: Card;
+  public card: Card;
 
-  constructor() { }
+  constructor(
+    private cardService: CardService
+  ) { }
 
   ngOnInit() {}
+
+  get cardValue(): string {
+    return this.cardService.getCardValueAsString(this.card);
+  }
+
+  get cardSuit(): string {
+    return this.cardService.getCardSuitAsString(this.card);
+  }
 
 }
