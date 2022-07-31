@@ -1,4 +1,19 @@
 :host {
-    outline: 2px solid;
+    outline: 1px solid gray;
+    box-shadow: 1px 1px 3px 0px grey, 0 0 1px 0px grey;
+    border-radius: 3px;
     width: 18vw;
+    padding: .1em;
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+}
+
+.lower-info {
+    padding-top: 0.5em;
+    & > * {
+        transform: rotate(180deg);
+    }
 }

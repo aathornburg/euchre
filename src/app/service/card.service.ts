@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Color } from '../enum/color.enum';
 import { Suit } from '../enum/suit.enum';
 import { Value } from '../enum/value.enum';
 import { Card } from '../model/card.model';
@@ -35,6 +36,17 @@ export class CardService {
         return '♥';
       case Suit.Spade:
         return '♠';
+    }
+  }
+
+  public getCardColor(card: Card): Color {
+    switch(Number(card.suit)) {
+      case Suit.Diamond:
+      case Suit.Heart:
+        return Color.Red;
+      case Suit.Club:
+      case Suit.Spade:
+        return Color.Black;
     }
   }
 }

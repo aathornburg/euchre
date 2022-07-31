@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Color } from 'src/app/enum/color.enum';
 import { Card } from 'src/app/model/card.model';
 import { CardService } from 'src/app/service/card.service';
 
@@ -24,6 +25,15 @@ export class CardComponent implements OnInit {
 
   get cardSuit(): string {
     return this.cardService.getCardSuitAsString(this.card);
+  }
+
+  get cardColorClass(): string {
+    switch(Number(this.cardService.getCardColor(this.card))) {
+      case Color.Red:
+        return 'red';
+      case Color.Black:
+        return 'black';
+    }
   }
 
 }

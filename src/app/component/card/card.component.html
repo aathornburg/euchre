@@ -1,7 +1,13 @@
-<div class="card-container">
-  <span class="upper-info">
+<div
+  class="card-container"
+  [ngClass]="cardColorClass"
+>
+  <div class="upper-info">
     <div> {{ cardValue }} </div>
     <div> {{ cardSuit }} </div>
-  </span>
-  <span class="lower-info"></span>
+  </div>
+  <div class="lower-info">
+    <div> {{ cardSuit }} </div>
+    <div> {{ cardValue }} </div>
+  </div>
 </div>
